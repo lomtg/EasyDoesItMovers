@@ -14,7 +14,11 @@
     <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/fonts.css">
     <link rel="stylesheet" type="text/css" href="~/css/style.css">
+
+    
 </head>
+
+
 <body>
     <div class="header-wrap">
         <header>
@@ -26,22 +30,22 @@
                         <span></span>
                     </button>
 
-                    <nav>
+                    <nav class="navigation">
                         <ul>
                             <li>
-                                <a href="index.html" class="active">Home</a>
+                                <a asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li>
-                                <a href="services.html">Moving Services</a>
+                                <a asp-controller="Home" asp-action="Services">Moving Services</a>
                             </li>
                             <li>
-                                <a href="team.html">Team</a>
+                                <a asp-controller="Home" asp-action="Team">Team</a>
                             </li>
                             <li>
-                                <a href="testimonials.html">Testimonials</a>
+                                <a asp-controller="Home" asp-action="Testimonials">Testimonials</a>
                             </li>
                             <li>
-                                <a href="contact.html">Contact</a>
+                                <a asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
                         </ul>
                     </nav>
@@ -50,8 +54,7 @@
         </header>
     </div>
 
-    @RenderBody();
-
+    @RenderBody()
 
     <footer>
         <p>© Copyright 2017 All Rights Reserved</p>
@@ -61,6 +64,13 @@
     <script src="~/plugins/jquery/jquery-3.1.1.min.js"></script>
     <script src="~/plugins/jquery.appear/jquery.appear.js"></script>
     <script src="~/js/global.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.navigation').find('[href="' + window.location.pathname + '"]').addClass('active');
+        });
+    </script>
 
 </body>
 </html>
