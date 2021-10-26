@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="~/images/favicons/manifest.json">
+    <link rel="mask-icon" href="~/images/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <title>EasyDoesItMovers</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/plugins/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+</head>
+<body>
+    <div class="header-wrap">
+        <header>
+            <div class="container to_animate" data-animation="fadeInUp">
+                <div class="flex-row">
+                    <a href="#" class="logo"><img src="~/images/logo.svg" alt="EasyDoesItMovers" /></a>
+
+                    <button class="hamburger">
+                        <span></span>
+                    </button>
+
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="index.html" class="active">Home</a>
+                            </li>
+                            <li>
+                                <a href="services.html">Moving Services</a>
+                            </li>
+                            <li>
+                                <a href="team.html">Team</a>
+                            </li>
+                            <li>
+                                <a href="testimonials.html">Testimonials</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    @RenderBody();
+
+
+    <footer>
+        <p>© Copyright 2017 All Rights Reserved</p>
+    </footer>
+
+    <script src="~/plugins/jsc/client.min.js"></script>
+    <script src="~/plugins/jquery/jquery-3.1.1.min.js"></script>
+    <script src="~/plugins/jquery.appear/jquery.appear.js"></script>
+    <script src="~/js/global.js"></script>
+
+</body>
+</html>
