@@ -31,6 +31,7 @@ namespace EasyDoesItMovers
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<AppDbContext>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<ITestimonialRepository, TestimonialRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

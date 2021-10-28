@@ -14,15 +14,22 @@ namespace EasyDoesItMovers.Controllers
     public class CreateController : Controller
     {
         private readonly ITeamRepository _teamRepository;
+        private readonly ITestimonialRepository _testimonialRepository;
 
-        public CreateController(ITeamRepository teamRepository)
+        public CreateController(ITeamRepository teamRepository,ITestimonialRepository testimonialRepository)
         {
             if (teamRepository is null)
             {
                 throw new ArgumentNullException(nameof(teamRepository));
             }
 
+            if (testimonialRepository is null)
+            {
+                throw new ArgumentNullException(nameof(testimonialRepository));
+            }
+
             _teamRepository = teamRepository;
+            _testimonialRepository = testimonialRepository;
         }
 
         [HttpGet]
@@ -47,16 +54,35 @@ namespace EasyDoesItMovers.Controllers
             team.ImageData = ImageDataIntoBytes;
             team.Id = Guid.NewGuid();
             _teamRepository.AddTeam(team);
-            ViewBag.ImageDataURl = GetImageDataURL(team.ImageData);
+            ViewBag.ImageDataURl = RetrieveImage.GetImageURL(team.ImageData);
             return View(team);
         }
 
-        public string GetImageDataURL(Byte[] imageData)
+        [HttpGet]
+        public IActionResult Testimonial()
         {
-            string imageBase64Data =
-            Convert.ToBase64String(imageData);
-            string imageDataURL = string.Format("data:image/jpg;base64,{0}",imageBase64Data);
-            return imageDataURL;
+            return View();
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TeamViewModel>>> ShowTestimonials()
+        {
+            return View(await _testimonialRepository.GetTestimonials());
+        }
+
+
+        [HttpPost]
+        public IActionResult Testimonial(Testimonial testimonial)
+        {
+            var file = Request.Form.Files.FirstOrDefault();
+
+            var ImageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+            testimonial.ImageData = ImageDataIntoBytes;
+            testimonial.Id = Guid.NewGuid();
+            _testimonialRepository.AddTestimonial(testimonial);
+            ViewBag.ImageDataURl = RetrieveImage.GetImageURL(testimonial.ImageData);
+            return View();
+        }
+
     }
 }

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<TestimonialViewModel>
+
+@foreach (var testimonial in Model)
+{
+    <h1>@testimonial.Name</h1>
+    <h1>@testimonial.Date</h1>
+    <h1>@testimonial.Text</h1>
+    <img src="@testimonial.ImageDataURL" />
+}
