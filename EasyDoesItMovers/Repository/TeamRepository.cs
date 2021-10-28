@@ -26,8 +26,8 @@ namespace EasyDoesItMovers.Repository
 
         public async Task AddTeam(Team team)
         {
-
-            await _context.AddAsync(team);
+            await _context.Teams.AddAsync(team);
+            _context.SaveChanges();
         }
 
         public async Task<IEnumerable<TeamViewModel>> GetTeams()

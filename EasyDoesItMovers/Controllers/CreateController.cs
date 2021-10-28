@@ -25,10 +25,17 @@ namespace EasyDoesItMovers.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TeamViewModel>>> Team()
+        public async Task<ActionResult<IEnumerable<TeamViewModel>>> ShowTeams()
         {
             return View(await _teamRepository.GetTeams());
         }
+
+        [HttpGet]
+        public IActionResult Team()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult Team(Team team)
@@ -54,6 +61,8 @@ namespace EasyDoesItMovers.Controllers
             //ViewBag.Text = image.Text;
             //ViewBag.Position = image.Position;
             ViewBag.ImageDataURl = GetImageDataURL(team.ImageData);
+            team.Id = Guid.NewGuid();
+            _teamRepository.AddTeam(team);
             return View(team);
         }
 

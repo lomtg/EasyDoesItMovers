@@ -1,0 +1,8 @@
+﻿@model IEnumerable<TeamViewModel>
+
+@foreach(var team in Model)
+        {
+            <h1>@team.Name</h1>
+            <h1>@team.ShortDescription</h1>
+            <img src="@team.ImageDataURL" />
+        }
