@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EasyDoesItMovers.Repository;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,17 @@ namespace EasyDoesItMovers.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ITeamRepository _teamRepository;
+
+        public HomeController(ITeamRepository teamRepository)
+        {
+            if (teamRepository is null)
+            {
+                throw new ArgumentNullException(nameof(teamRepository));
+            }
+
+            _teamRepository = teamRepository;
+        }
     
         public IActionResult Index()
         {
@@ -26,9 +38,9 @@ namespace EasyDoesItMovers.Controllers
             return View();
         }
         
-        public IActionResult Team()
+        public async Task<ActionResult> Team()
         {
-            return View();
+            return View(await _teamRepository.GetTeams());
         }
         public IActionResult Testimonials()
         {

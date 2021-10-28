@@ -1,110 +1,34 @@
-﻿<main class="page usefull-tips">
+﻿@model IEnumerable<TeamViewModel>
+
+<main class="page usefull-tips">
     <div class="page-head">
         <h1 class="to_animate" data-animation="fadeIn">Team</h1>
     </div>
 
-    <div class="list">
-        <div class="container">
-            <div class="row">
-                <div class="isotope-grid">
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="item to_animate" data-animation="fadeInUp">
-                            <figure>
-                                <img src="~/images/usefull_tips/01.jpg" alt="" />
-                            </figure>
-                            <div>
-                                <h3 class="item-title">Fragile Items</h3>
-                                <div class="text">
-                                    <p>
-                                        Ensuring your fragile items make it to your new destination safely is often the top concern. Nothing is more disappointing than finding that some of your favorite glassware has been broken during your move.  To help your items travel safely, be sure everything is packed snuggly to prevent shifting and movement during transit. Any items that are hollow such as glasses or vases should be stuffed with newspaper or packing paper. For dishes and other flat items, ensure each article is wrapped before it is stacked. It is it also a good idea to pad the inside of your boxes with bubble wrap if possible.
-                                    </p>
+        <div class="list">
+            <div class="container">
+                <div class="row">
+                    <div class="isotope-grid">
+                        @foreach (var team in Model)
+                        {
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="item to_animate" data-animation="fadeInUp">
+                                    <figure>
+                                        <img src="@team.ImageDataURL" alt="" />
+                                    </figure>
+                                    <div>
+                                        <h3 class="item-title">@team.Name</h3>
+                                        <div class="text">
+                                            <p>
+                                                @team.ShortDescription
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
-
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="item to_animate" data-animation="fadeInUp">
-                            <figure>
-                                <img src="~/images/usefull_tips/02.jpg" alt="" />
-                            </figure>
-                            <div>
-                                <h3 class="item-title">How to Choose a Moving Company</h3>
-                                <div class="text">
-                                    <p>
-                                        Moving is often one of the stressful projects to undertake. It is important to hire a moving provider who is competent, caring and reliable. EasyDoesItMovers has a crew of specialists who do everything possible to transport any cargo safely and efficiently: from the most valuable and fragile keepsakes, to unwanted construction debris. We work quickly, and safely while remaining affordable and dependable so that no matter what you are moving, the job will be done right.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="item to_animate" data-animation="fadeInUp">
-                            <figure>
-                                <img src="~/images/usefull_tips/03.jpg" alt="" />
-                            </figure>
-                            <div>
-                                <h3 class="item-title">Valuables</h3>
-                                <div class="text">
-                                    <p>
-                                        It is important to pack your valuable things yourself no matter who you are using to help you move. Also, do not put everything in one box. Mark the boxes so you will know the specific items inside. It is also helpful to make a list, or take pictures of valuable items. Finally,  it is often best to transport valuables in your personal vehicle if possible, as opposed to placing them in the moving truck.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="item to_animate" data-animation="fadeInUp">
-                            <figure>
-                                <img src="~/images/usefull_tips/06.jpg" alt="" />
-                            </figure>
-                            <div>
-                                <h3 class="item-title">Boxes</h3>
-                                <div class="text">
-                                    <p>
-                                        Put heavy items, like books, in small boxes. Put all your large light items such as pillows and linens in bigger ones. Large heavy boxes are not only difficult and dangerous for our movers to carry, they also give better chance for your items to break during your move. Also, don’t leave gaps and empty spaces in the boxes. Use towels, paper or other material to fill in these gaps to prevent shifting within the box. Finally, label each box with a description of its contents and the room it’s destined for. This will help you and your movers know where every box belongs when arriving to your new home.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="item to_animate" data-animation="fadeInUp">
-                            <figure>
-                                <img src="~/images/usefull_tips/04.jpg" alt="" />
-                            </figure>
-                            <div>
-                                <h3 class="item-title">Hazardous material </h3>
-                                <div class="text">
-                                    <p>
-                                        Due to the dangers and often unknown properties of hazardous materials, please ensure you inform our crew if you have anything that you are unsure about. Special handling and permits are often required when handling hazardous materials. Normal household items such as cleaning supplies, paints and solvents, can typically be moved without concern. However, it is always best to inform your movers if you have any items such as the is that are dangerous or flammable. This not only ensures the safety of our crew, but the safe transport of your household items as well.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                        <div class="item to_animate" data-animation="fadeInUp">
-                            <figure>
-                                <img src="~/images/usefull_tips/05.jpg" alt="" />
-                            </figure>
-                            <div>
-                                <h3 class="item-title">HOW TO MOVE ON A BUDGET</h3>
-                                <div class="text">
-                                    <p>
-                                        Proper planning and preparation will go along way when planning your move. Not only will it save you time and money, but headache and stress as well. Packing ahead, researching moving companies, and ensuring your personal items are in order will all save you money the day of your move. Please feel free to contact one of our customer service representatives to discuss money saving tips specific to your move.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-    </div>
 </main>
