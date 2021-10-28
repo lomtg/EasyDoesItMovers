@@ -1,4 +1,6 @@
 ﻿using EasyDoesItMovers.Models;
+using EasyDoesItMovers.Repository;
+using EasyDoesItMovers.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,22 +12,34 @@ namespace EasyDoesItMovers.Controllers
 {
     public class CreateController : Controller
     {
-        [HttpGet]
-        public IActionResult Team()
+        private readonly ITeamRepository _teamRepository;
+
+        public CreateController(ITeamRepository teamRepository)
         {
-            return View();
+            if (teamRepository is null)
+            {
+                throw new ArgumentNullException(nameof(teamRepository));
+            }
+
+            _teamRepository = teamRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TeamViewModel>>> Team()
+        {
+            return View(await _teamRepository.GetTeams());
         }
 
         [HttpPost]
         public IActionResult Team(Team team)
         {
             var file = Request.Form.Files.FirstOrDefault();
-
             //Image img = new Image();
             //img.ImageTitle = file.FileName;
 
             MemoryStream ms = new MemoryStream();
             file.CopyTo(ms);
+
             //img.ImageData = ms.ToArray();
             team.ImageData = ms.ToArray();
 
