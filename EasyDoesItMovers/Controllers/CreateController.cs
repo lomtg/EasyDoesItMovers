@@ -1,4 +1,5 @@
-﻿using EasyDoesItMovers.Models;
+﻿using EasyDoesItMovers.Helpers;
+using EasyDoesItMovers.Models;
 using EasyDoesItMovers.Repository;
 using EasyDoesItMovers.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -41,46 +42,14 @@ namespace EasyDoesItMovers.Controllers
         public IActionResult Team(Team team)
         {
             var file = Request.Form.Files.FirstOrDefault();
-            //Image img = new Image();
-            //img.ImageTitle = file.FileName;
 
-            MemoryStream ms = new MemoryStream();
-            file.CopyTo(ms);
-
-            //img.ImageData = ms.ToArray();
-            team.ImageData = ms.ToArray();
-
-            ms.Close();
-            ms.Dispose();
-
-            //_context.Images.Add(image);
-            //_context.SaveChanges();
-
-            //ViewBag.Message = "Image(s) stored in database!";
-            //ViewBag.ShortDescription = image.ShortDescription;
-            //ViewBag.Text = image.Text;
-            //ViewBag.Position = image.Position;
-            ViewBag.ImageDataURl = GetImageDataURL(team.ImageData);
+            var ImageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+            team.ImageData = ImageDataIntoBytes;
             team.Id = Guid.NewGuid();
             _teamRepository.AddTeam(team);
+            ViewBag.ImageDataURl = GetImageDataURL(team.ImageData);
             return View(team);
         }
-
-        /*
-        [HttpPost]
-        public ActionResult RetrieveImage()
-        {
-            Image img = _context.Images.OrderByDescending
-            (i => i.Id).FirstOrDefault();
-            string imageBase64Data =
-        Convert.ToBase64String(img.ImageData);
-            string imageDataURL =
-        string.Format("data:image/jpg;base64,{0}",
-        imageBase64Data);
-            ViewBag.ImageTitle = img.ImageTitle;
-            ViewBag.ImageDataUrl = imageDataURL;
-            return View("Index", img);
-        } */
 
         public string GetImageDataURL(Byte[] imageData)
         {
