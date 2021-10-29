@@ -15,8 +15,11 @@ namespace EasyDoesItMovers.Controllers
     {
         private readonly ITeamRepository _teamRepository;
         private readonly ITestimonialRepository _testimonialRepository;
+        private readonly IInformationRepository _informationRepository;
 
-        public CreateController(ITeamRepository teamRepository,ITestimonialRepository testimonialRepository)
+        public CreateController(ITeamRepository teamRepository,
+            ITestimonialRepository testimonialRepository,
+            IInformationRepository informationRepository)
         {
             if (teamRepository is null)
             {
@@ -28,9 +31,21 @@ namespace EasyDoesItMovers.Controllers
                 throw new ArgumentNullException(nameof(testimonialRepository));
             }
 
+            if (informationRepository is null)
+            {
+                throw new ArgumentNullException(nameof(informationRepository));
+            }
+
             _teamRepository = teamRepository;
             _testimonialRepository = testimonialRepository;
+            _informationRepository = informationRepository;
         }
+        [HttpGet]
+        public IActionResult Information()
+        {
+            return View(_informationRepository.GetInformationPageFromMemory("moving-services"));
+        }
+
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TeamViewModel>>> ShowTeams()
