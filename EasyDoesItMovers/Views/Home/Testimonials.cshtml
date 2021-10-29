@@ -1,93 +1,28 @@
-﻿<main class="page testimonials">
+﻿@model IEnumerable<TestimonialViewModel>
+
+<main class="page testimonials">
     <div class="page-head">
         <h1 class="to_animate" data-animation="fadeIn">Testimonials</h1>
     </div>
 
     <div class="container">
         <div class="list">
-            <blockquote class="to_animate" data-animation="fadeInRight">
-                <span class="avatar">
-                    <img src="~/images/testimonials/01.jpg" alt="Lakisha Knaus">
-                </span>
+            @foreach (var testimonial in Model)
+            {
+                <blockquote class="to_animate" data-animation="fadeInRight">
+                    <span class="avatar">
+                        <img src="@testimonial.ImageDataURL" alt="Lakisha Knaus">
+                    </span>
 
-                <div>
-                    <h4 class="author-name">Richard Brown</h4>
-                    <span class="blockqoute-meta">September 12, 2017</span>
-                    <div class="blockqoute-content">
-                        The service was excellent. EasyDoesItMovers did the job with professionalism and courtesy. They are true professionals. Thanks a lot.
+                    <div>
+                        <h4 class="author-name">@testimonial.Name</h4>
+                        <span class="blockqoute-meta">@testimonial.Date</span>
+                        <div class="blockqoute-content">
+                            @testimonial.Text
+                        </div>
                     </div>
-                </div>
-            </blockquote>
-
-            <blockquote class="to_animate" data-animation="fadeInLeft">
-                <span class="avatar">
-                    <img src="~/images/testimonials/02.jpg" alt="Lakisha Knaus">
-                </span>
-
-                <div>
-                    <h4 class="author-name">Elizabeth Marks</h4>
-                    <span class="blockqoute-meta">September 18, 2017</span>
-                    <div class="blockqoute-content">
-                        I am highly satisfied with the price and services received. The crew was fast and efficient, while carefully handling all of our household items. It was nice to work with an experienced staff. Highly recommended.
-                    </div>
-                </div>
-            </blockquote>
-
-            <blockquote class="to_animate" data-animation="fadeInRight">
-                <span class="avatar">
-                    <img src="~/images/testimonials/03.jpg" alt="Lakisha Knaus">
-                </span>
-
-                <div>
-                    <h4 class="author-name">Anetta Schwarz</h4>
-                    <span class="blockqoute-meta">September 22, 2017</span>
-                    <div class="blockqoute-content">
-                        I couldn’t believe the delivery was so fast! Affordable prices and superb service! I hope I never move again but if I did, I would choose EasyDoesItMovers! Recommend!
-                    </div>
-                </div>
-            </blockquote>
-
-            <blockquote class="to_animate" data-animation="fadeInLeft">
-                <span class="avatar">
-                    <img src="~/images/testimonials/04.jpg" alt="Lakisha Knaus">
-                </span>
-
-                <div>
-                    <h4 class="author-name">Josie Ambers</h4>
-                    <span class="blockqoute-meta">September 23, 2017</span>
-                    <div class="blockqoute-content">
-                        They are the best movers in a local area! Thanks a lot for a great moving service! Highly recommend!
-                    </div>
-                </div>
-            </blockquote>
-
-            <blockquote class="to_animate" data-animation="fadeInRight">
-                <span class="avatar">
-                    <img src="~/images/testimonials/05.jpg" alt="Lakisha Knaus">
-                </span>
-
-                <div>
-                    <h4 class="author-name">Amanda Taylor</h4>
-                    <span class="blockqoute-meta">September 24, 2017</span>
-                    <div class="blockqoute-content">
-                        We always call EasyDoesItMovers for my company’s cargo needs. Many thanks to the customer service representatives who make planning easy and stress free!
-                    </div>
-                </div>
-            </blockquote>
-
-            <blockquote class="to_animate" data-animation="fadeInLeft">
-                <span class="avatar">
-                    <img src="~/images/testimonials/06.jpg" alt="Lakisha Knaus">
-                </span>
-
-                <div>
-                    <h4 class="author-name">Aiko Tanaka</h4>
-                    <span class="blockqoute-meta">September 27, 2017</span>
-                    <div class="blockqoute-content">
-                        Recently used EasyDoesItMovers  for my mother’s move. They were courteous and patient and their speed and efficiency were unsurpassed.  Thank you!
-                    </div>
-                </div>
-            </blockquote>
+                </blockquote>
+            }
         </div>
     </div>
 </main>
