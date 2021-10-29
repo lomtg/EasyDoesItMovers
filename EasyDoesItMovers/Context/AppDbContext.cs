@@ -15,5 +15,6 @@ namespace EasyDoesItMovers.Context
         }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Information> Information { get; set; }
     }
 }
