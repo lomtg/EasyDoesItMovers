@@ -40,6 +40,7 @@ namespace EasyDoesItMovers.Controllers
             _testimonialRepository = testimonialRepository;
             _informationRepository = informationRepository;
         }
+
         [HttpGet]
         public IActionResult Information()
         {
