@@ -9,7 +9,7 @@ namespace EasyDoesItMovers.Repository
 {
     public interface IInformationRepository
     {
-        public Task<InformationViewModel> GetInformationPage(string slug);
+        public Task<Information> GetInformationPage(string slug);
         public Task AddInformationPage(Information information);
         public Task DeleteInformationPage(string slug);
         public Task<IEnumerable<InformationViewModel>> GetInformationPage();

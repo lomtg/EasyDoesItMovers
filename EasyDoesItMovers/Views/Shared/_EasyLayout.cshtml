@@ -60,6 +60,7 @@
         <p>© Copyright 2017 All Rights Reserved</p>
     </footer>
 
+
     <script src="~/plugins/jsc/client.min.js"></script>
     <script src="~/plugins/jquery/jquery-3.1.1.min.js"></script>
     <script src="~/plugins/jquery.appear/jquery.appear.js"></script>
@@ -69,8 +70,20 @@
     <script>
         $(document).ready(function () {
             $('.navigation').find('[href="' + window.location.pathname + '"]').addClass('active');
+            console.log('[href="' + window.location.pathname + '"]');
         });
     </script>
+
+
+    @if (Model is Information)
+    {
+        <script>
+                $(document).ready(function () {
+                    $('.navigation').find('[href="' + window.location.pathname + "?slug=" +@Model.Slug + '"]').addClass('active');
+                    console.log('[href="' + window.location.pathname + '"]');
+                });
+        </script> 
+    } 
 
 </body>
 </html>

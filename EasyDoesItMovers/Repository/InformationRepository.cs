@@ -50,15 +50,16 @@ namespace EasyDoesItMovers.Repository
             return viewModels;
         }
 
-        public async Task<InformationViewModel> GetInformationPage(string slug)
+        public async Task<Information> GetInformationPage(string slug)
         {
-            var information = await _context.Information.FirstOrDefaultAsync(o => o.Slug == slug);
+            /* var information = await _context.Information.FirstOrDefaultAsync(o => o.Slug == slug);
             return new InformationViewModel()
             {
                 Title = information.Title,
                 Text = information.Text,
                 ShortDescription = information.ShortDescription
-            };
+            }; */
+            return await _context.Information.FirstOrDefaultAsync(o => o.Slug == slug);
         }
 
         public Information GetInformationPageFromMemory(string slug)

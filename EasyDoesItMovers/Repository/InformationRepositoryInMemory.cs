@@ -44,5 +44,10 @@ namespace EasyDoesItMovers.Repository
         {
             throw new NotImplementedException();
         }
+
+        Task<Information> IInformationRepository.GetInformationPage(string slug)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
