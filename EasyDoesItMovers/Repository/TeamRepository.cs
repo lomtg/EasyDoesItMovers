@@ -1,4 +1,5 @@
-﻿using EasyDoesItMovers.Context;
+﻿using AutoMapper;
+using EasyDoesItMovers.Context;
 using EasyDoesItMovers.Helpers;
 using EasyDoesItMovers.Models;
 using EasyDoesItMovers.ViewModels;
@@ -13,15 +14,22 @@ namespace EasyDoesItMovers.Repository
     public class TeamRepository : ITeamRepository
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public TeamRepository(AppDbContext context)
+        public TeamRepository(AppDbContext context,IMapper mapper)
         {
             if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task AddTeam(Team team)
@@ -33,18 +41,7 @@ namespace EasyDoesItMovers.Repository
         public async Task<IEnumerable<TeamViewModel>> GetTeams()
         {
             var teams = await _context.Teams.ToListAsync();
-            List<TeamViewModel> viewModels = new List<TeamViewModel>();
-            foreach (var team in teams)
-            {
-                viewModels.Add(
-                    new TeamViewModel
-                    {
-                        Name = team.Name,
-                        ShortDescription = team.ShortDescription,
-                        ImageDataURL = team.ImageData.GetImageURL()
-                    });
-            }
-            return viewModels;
+            return _mapper.Map<IEnumerable<TeamViewModel>>(teams);
         }
         public Task DeleteTeam(Guid Id)
         {

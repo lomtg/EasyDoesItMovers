@@ -1,4 +1,5 @@
-﻿using EasyDoesItMovers.Context;
+﻿using AutoMapper;
+using EasyDoesItMovers.Context;
 using EasyDoesItMovers.Helpers;
 using EasyDoesItMovers.Models;
 using EasyDoesItMovers.ViewModels;
@@ -13,15 +14,22 @@ namespace EasyDoesItMovers.Repository
     public class TestimonialRepository : ITestimonialRepository
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public TestimonialRepository(AppDbContext context)
+        public TestimonialRepository(AppDbContext context,IMapper mapper)
         {
             if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task AddTestimonial(Testimonial testimonial)
@@ -30,23 +38,10 @@ namespace EasyDoesItMovers.Repository
             _context.SaveChanges();
         }
 
-
         public async Task<IEnumerable<TestimonialViewModel>> GetTestimonials()
         {
             var testimonials = await _context.Testimonials.ToListAsync();
-            List<TestimonialViewModel> viewModels = new List<TestimonialViewModel>();
-            foreach (var testimonial in testimonials)
-            {
-                viewModels.Add(
-                    new TestimonialViewModel
-                    {
-                        Name = testimonial.Name,
-                        Date = testimonial.Date,
-                        Text = testimonial.Text,
-                        ImageDataURL = testimonial.ImageData.GetImageURL()
-                    });
-            }
-            return viewModels;
+            return _mapper.Map<IEnumerable<TestimonialViewModel>>(testimonials);
         }
         public Task DeleteTestimonial(Guid Id)
         {

@@ -27,6 +27,7 @@ namespace EasyDoesItMovers
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<AppDbContext>(options => options
                 .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<AppDbContext>();
