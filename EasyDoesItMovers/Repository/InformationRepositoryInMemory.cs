@@ -39,5 +39,10 @@ namespace EasyDoesItMovers.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<InformationViewModel>> GetInformationPage()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

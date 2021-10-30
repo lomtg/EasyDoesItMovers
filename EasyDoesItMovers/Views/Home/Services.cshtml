@@ -1,34 +1,14 @@
-﻿<main class="page services">
+﻿@model InformationViewModel
+<main class="page services">
     <div class="page-head">
-        <h1 class="to_animate" data-animation="fadeIn">Moving Services</h1>
+        <h1 class="to_animate" data-animation="fadeIn">@Model.Title </h1>
     </div>
 
     <div class="container">
         <article class="article">
-            <h1 class="title article-title to_animate" data-animation="fadeInUp">Full and Partial Packing</h1>
+            <h1 class="title article-title to_animate" data-animation="fadeInUp">@Model.ShortDescription</h1>
             <div class="text to_animate" data-animation="fadeInUp">
-                <p>
-                    We have a team of experienced professionals. EasyDoesItMovers can move your cargo everywhere you need in the South Amboy area. We offer you a high quality service at an affordable price. The only thing you have to do is to email or call us and our highly qualified professionals will come and pack everything you need, then deliver it wherever you wish, safely and on time.
-                </p>
-
-                <p>
-                    Long Distance moving can be stressful and complicated. Our team will ensure your belongings are moved safely and efficiently to their destination, while taking the headache out the moving process. Leave it to our professionals to manage all aspects of your long distance move.
-                </p>
-
-                <p>
-                    EasyDoesItMovers has the right equipment for the job. From pianos to paintings, motorcycles to marble tables, we have you covered. We offer full-service as well as partial packing to suit your moving needs. Call and speak to one of our relocation specialists today!
-                </p>
-                <p>
-                    We have a team of experienced professionals. EasyDoesItMovers can move your cargo everywhere you need in the South Amboy area. We offer you a high quality service at an affordable price. The only thing you have to do is to email or call us and our highly qualified professionals will come and pack everything you need, then deliver it wherever you wish, safely and on time.
-                </p>
-
-                <p>
-                    Long Distance moving can be stressful and complicated. Our team will ensure your belongings are moved safely and efficiently to their destination, while taking the headache out the moving process. Leave it to our professionals to manage all aspects of your long distance move.
-                </p>
-
-                <p>
-                    EasyDoesItMovers has the right equipment for the job. From pianos to paintings, motorcycles to marble tables, we have you covered. We offer full-service as well as partial packing to suit your moving needs. Call and speak to one of our relocation specialists today!
-                </p>
+                @Html.Raw(Model.Text)
             </div>
         </article>
     </div>

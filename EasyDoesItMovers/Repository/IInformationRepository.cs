@@ -12,6 +12,7 @@ namespace EasyDoesItMovers.Repository
         public Task<InformationViewModel> GetInformationPage(string slug);
         public Task AddInformationPage(Information information);
         public Task DeleteInformationPage(string slug);
+        public Task<IEnumerable<InformationViewModel>> GetInformationPage();
         public Information GetInformationPageFromMemory(string slug);
     }
 }

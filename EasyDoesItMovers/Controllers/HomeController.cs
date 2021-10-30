@@ -13,9 +13,11 @@ namespace EasyDoesItMovers.Controllers
     {
         private readonly ITeamRepository _teamRepository;
         private readonly ITestimonialRepository _testimonialRepository;
+        private readonly IInformationRepository _informationRepository;
 
-        public HomeController(ITeamRepository teamRepository
-            ,ITestimonialRepository testimonialRepository)
+        public HomeController(ITeamRepository teamRepository,
+            ITestimonialRepository testimonialRepository,
+            IInformationRepository informationRepository)
         {
             if (teamRepository is null)
             {
@@ -27,8 +29,14 @@ namespace EasyDoesItMovers.Controllers
                 throw new ArgumentNullException(nameof(testimonialRepository));
             }
 
+            if (informationRepository is null)
+            {
+                throw new ArgumentNullException(nameof(informationRepository));
+            }
+
             _teamRepository = teamRepository;
             _testimonialRepository = testimonialRepository;
+            _informationRepository = informationRepository;
         }
     
         public IActionResult Index()
@@ -41,9 +49,9 @@ namespace EasyDoesItMovers.Controllers
             return View();
         }
 
-        public IActionResult Services()
+        public async Task<ActionResult> Services()
         {
-            return View();
+            return View(await _informationRepository.GetInformationPage("moving-services"));
         }
         
         public async Task<ActionResult> Team()
