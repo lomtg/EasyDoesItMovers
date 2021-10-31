@@ -10,6 +10,7 @@ namespace EasyDoesItMovers.Repository
     public interface ITeamRepository
     {
         public Task<IEnumerable<TeamViewModel>> GetTeams();
+        public Task<IEnumerable<Team>> GetTeamsAdmin();
         public Task AddTeam(Team team);
         public Task DeleteTeam(Guid Id);
     }

@@ -1,4 +1,5 @@
-﻿using EasyDoesItMovers.Context;
+﻿using AutoMapper;
+using EasyDoesItMovers.Context;
 using EasyDoesItMovers.Models;
 using EasyDoesItMovers.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -12,15 +13,22 @@ namespace EasyDoesItMovers.Repository
     public class InformationRepository : IInformationRepository
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public InformationRepository(AppDbContext context)
+        public InformationRepository(AppDbContext context, IMapper mapper)
         {
             if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
 
+            if (mapper is null)
+            {
+                throw new ArgumentNullException(nameof(mapper));
+            }
+
             _context = context;
+            _mapper = mapper;
         }
         public async Task AddInformationPage(Information information)
         {
@@ -33,32 +41,18 @@ namespace EasyDoesItMovers.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<InformationViewModel>> GetInformationPage()
+        public async Task<IEnumerable<InformationViewModel>> GetInformationPages()
         {
             var informations = await _context.Information.ToListAsync();
-            List<InformationViewModel> viewModels = new List<InformationViewModel>();
-            foreach (var information in informations)
-            {
-                viewModels.Add(
-                    new InformationViewModel
-                    {
-                        Title = information.Title,
-                        Text = information.Text,
-                        ShortDescription = information.ShortDescription
-                    });
-            }
-            return viewModels;
+            return _mapper.Map<IEnumerable<InformationViewModel>>(informations);
+        }
+        public async Task<IEnumerable<Information>> GetInformationPagesAdmin()
+        {
+            return await _context.Information.ToListAsync();
         }
 
         public async Task<Information> GetInformationPage(string slug)
         {
-            /* var information = await _context.Information.FirstOrDefaultAsync(o => o.Slug == slug);
-            return new InformationViewModel()
-            {
-                Title = information.Title,
-                Text = information.Text,
-                ShortDescription = information.ShortDescription
-            }; */
             return await _context.Information.FirstOrDefaultAsync(o => o.Slug == slug);
         }
 

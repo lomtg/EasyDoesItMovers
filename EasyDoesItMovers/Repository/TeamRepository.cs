@@ -43,6 +43,11 @@ namespace EasyDoesItMovers.Repository
             var teams = await _context.Teams.ToListAsync();
             return _mapper.Map<IEnumerable<TeamViewModel>>(teams);
         }
+
+        public async Task<IEnumerable<Team>> GetTeamsAdmin()
+        {
+            return await _context.Teams.ToListAsync();
+        }
         public Task DeleteTeam(Guid Id)
         {
             throw new NotImplementedException();

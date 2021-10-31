@@ -1,4 +1,5 @@
 ﻿using EasyDoesItMovers.Models;
+using EasyDoesItMovers.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +14,32 @@ namespace EasyDoesItMovers.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly ITeamRepository _teamRepository;
+        private readonly ITestimonialRepository _testimonialRepository;
+        private readonly IInformationRepository _informationRepository;
+
+        public AdminController(ITeamRepository teamRepository, ITestimonialRepository testimonialRepository,IInformationRepository informationRepository)
+        {
+            if (teamRepository is null)
+            {
+                throw new ArgumentNullException(nameof(teamRepository));
+            }
+
+            if (testimonialRepository is null)
+            {
+                throw new ArgumentNullException(nameof(testimonialRepository));
+            }
+
+            if (informationRepository is null)
+            {
+                throw new ArgumentNullException(nameof(informationRepository));
+            }
+
+            _teamRepository = teamRepository;
+            _testimonialRepository = testimonialRepository;
+            _informationRepository = informationRepository;
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -66,7 +93,25 @@ namespace EasyDoesItMovers.Controllers
         [HttpGet]
         public IActionResult Home()
         {
-            return View("Home");
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Team()
+        {
+            return View(await _teamRepository.GetTeamsAdmin());
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Testimonial()
+        {
+            return View(await _testimonialRepository.GetTestimonialsAdmin());
+        }
+
+        [HttpGet("Admin/{slug}")]
+        public async Task<ActionResult> Services(string slug)
+        {
+            return View(await _informationRepository.GetInformationPage(slug));
         }
     }
 }

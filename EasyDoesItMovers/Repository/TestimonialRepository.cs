@@ -43,9 +43,14 @@ namespace EasyDoesItMovers.Repository
             var testimonials = await _context.Testimonials.ToListAsync();
             return _mapper.Map<IEnumerable<TestimonialViewModel>>(testimonials);
         }
+        public async Task<IEnumerable<Testimonial>> GetTestimonialsAdmin()
+        {
+            return await _context.Testimonials.ToListAsync();
+        }
         public Task DeleteTestimonial(Guid Id)
         {
             throw new NotImplementedException();
         }
+
     }
 }
