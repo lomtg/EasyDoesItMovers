@@ -1,11 +1,10 @@
 ﻿@model IEnumerable<Team>
-<h1>Restaurants</h1>
+<h1>Teams</h1>
 
 <form method="get">
     <div class="form-group">
         <div class="input-group">
-            <input type="search" class="form-control" />
-                @*asp-for="SearchTerm" />*@
+            <input type="search" class="form-control" asp-controller="Admin" asp-action="Team" name="name" asp-validaton=""/>
             <span class="input-group-btn">
                 <button class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i>
@@ -50,3 +49,4 @@
 </table>
 
 <a asp-controller="Admin" asp-action="Home" class="btn btn-primary">Add New</a>
+<a asp-controller="Admin" asp-action="Team" class="btn btn-primary">Show All Teams</a>

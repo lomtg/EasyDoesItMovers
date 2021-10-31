@@ -18,7 +18,7 @@ namespace EasyDoesItMovers.Controllers
         private readonly ITestimonialRepository _testimonialRepository;
         private readonly IInformationRepository _informationRepository;
 
-        public AdminController(ITeamRepository teamRepository, ITestimonialRepository testimonialRepository,IInformationRepository informationRepository)
+        public AdminController(ITeamRepository teamRepository, ITestimonialRepository testimonialRepository, IInformationRepository informationRepository)
         {
             if (teamRepository is null)
             {
@@ -60,7 +60,7 @@ namespace EasyDoesItMovers.Controllers
 
             Admin admin = new Admin();
 
-            if(admin.Username != login.Username || admin.Password != admin.Password)
+            if (admin.Username != login.Username || admin.Password != admin.Password)
             {
                 ViewBag.Error = "Incorrect Credentials";
                 return View();
@@ -97,15 +97,23 @@ namespace EasyDoesItMovers.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Team()
+        public async Task<ActionResult> Team(string name)
         {
+            if (String.IsNullOrWhiteSpace(name))
+            {
             return View(await _teamRepository.GetTeamsAdmin());
+            }
+            return View(_teamRepository.GetTeamsAdmin().Result.Where(o=> o.Name.ToUpper().Contains(name.ToUpper())));
         }
 
         [HttpGet]
-        public async Task<ActionResult> Testimonial()
+        public async Task<ActionResult> Testimonial(string name)
         {
-            return View(await _testimonialRepository.GetTestimonialsAdmin());
+            if(String.IsNullOrWhiteSpace(name))
+            {
+             return View(await _testimonialRepository.GetTestimonialsAdmin());
+            }
+            return View(_testimonialRepository.GetTestimonialsAdmin().Result.Where(o => o.Name.ToUpper().Contains(name.ToUpper())));
         }
 
         [HttpGet("Admin/{slug}")]
