@@ -30,24 +30,27 @@
 
     @foreach (var testimonial in Model)
     {
-        <tr>
-            <td>@testimonial.Name</td>
-            <td>@testimonial.Date</td>
-            <td>@testimonial.Text</td>
-            <td><img src="@testimonial.ImageData.GetImageURL()" width="170" height="110" /></td>
-            <td>
-                <a class="btn btn-lg"
-                   asp-controller="Admin" asp-action="Home"
-                   asp-route-teamId="@testimonial.Id">
-                    <i class="glyphicon glyphicon-remove"></i>
-                </a>
-                <a class="btn btn-lg"
-                   asp-controller="Admin" asp-action="Home"
-                   asp-route-teamId="@testimonial.Id">
-                    <i class="glyphicon glyphicon-edit"></i>
-                </a>
-            </td>
-        </tr>
+<tr>
+    <td>@testimonial.Name</td>
+    <td>@testimonial.Date</td>
+    <td>@testimonial.Text</td>
+            @if (testimonial.ImageData != null)
+            {
+                <td><img src="@testimonial.ImageData.GetImageURL()" width="170" height="110" /></td>
+            }
+    <td>
+        <a class="btn btn-lg"
+           asp-controller="Admin" asp-action="Home"
+           asp-route-Id="@testimonial.Id">
+            <i class="glyphicon glyphicon-remove"></i>
+        </a>
+        <a class="btn btn-lg"
+           asp-controller="Admin" asp-action="TestimonialEdit"
+           asp-route-Id="@testimonial.Id">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+    </td>
+</tr>
 
     }
 </table>

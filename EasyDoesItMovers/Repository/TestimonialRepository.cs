@@ -47,10 +47,22 @@ namespace EasyDoesItMovers.Repository
         {
             return await _context.Testimonials.ToListAsync();
         }
-        public Task DeleteTestimonial(Guid Id)
+        public Task DeleteTestimonial(Guid id)
         {
             throw new NotImplementedException();
         }
+        public async Task UpdateTestimonial(Guid id, Testimonial testimonial)
+        {
+            var entity = _context.Testimonials.FirstOrDefault(o => o.Id == id);
 
+            if (entity != null)
+            {
+                entity.Name = testimonial.Name;
+                entity.Date = testimonial.Date;
+                entity.Text = testimonial.Text;
+                entity.ImageData = testimonial.ImageData;
+            }
+            await _context.SaveChangesAsync();
+        }
     }
 }

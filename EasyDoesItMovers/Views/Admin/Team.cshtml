@@ -34,7 +34,10 @@
             <td>@team.Position</td>
             <td>@team.Text</td>
             <td>@team.ShortDescription</td>
-            <td><img src="@team.ImageData.GetImageURL()" width="170" height="110" /></td>
+            @if(team.ImageData != null)
+                {
+                    <td><img src="@team.ImageData.GetImageURL()" width="170" height="110" /></td>
+                }
             <td>
                 <a class="btn btn-lg"
                    asp-controller="Admin" asp-action="Home"

@@ -133,11 +133,34 @@ namespace EasyDoesItMovers.Controllers
         public async Task<ActionResult> TeamEdit(Guid id,Team updatingTeam)
         {
             var file = Request.Form.Files.FirstOrDefault();
-            var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
-            updatingTeam.ImageData = imageDataIntoBytes;
+            if (file != null)
+            {
+                var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+                updatingTeam.ImageData = imageDataIntoBytes;
+            }
 
             await _teamRepository.UpdateTeam(id,updatingTeam);
             return View("Team",_teamRepository.GetTeamsAdmin().Result);
+        }
+
+        [HttpGet]
+        public IActionResult TestimonialEdit(Guid id)
+        {
+            return View(_testimonialRepository.GetTestimonialsAdmin().Result.ToList().FirstOrDefault(o => o.Id == id));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> TestimonialEdit(Guid id, Testimonial updatingTestimonial)
+        {
+            var file = Request.Form.Files.FirstOrDefault();
+            if(file != null)
+            {
+            var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+            updatingTestimonial.ImageData = imageDataIntoBytes;
+            }
+
+            await _testimonialRepository.UpdateTestimonial(id, updatingTestimonial);
+            return View("Testimonial", _teamRepository.GetTeamsAdmin().Result);
         }
 
     }
