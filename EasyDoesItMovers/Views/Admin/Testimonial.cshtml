@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<Testimonial>
 <h1>Testimonials</h1>
 
+
 <form method="get">
     <div class="form-group">
         <div class="input-group">
-            <input type="search" class="form-control" asp-controller="Admin" asp-action="Testimonial" name="name"/>
+            <input type="search" class="form-control" asp-controller="Admin" asp-action="Testimonial" name="name" />
             <span class="input-group-btn">
                 <button class="btn btn-default">
                     <i class="glyphicon glyphicon-search"></i>
@@ -13,6 +14,11 @@
         </div>
     </div>
 </form>
+
+<div class="form-group">
+    <a asp-controller="Admin" asp-action="Home" class="btn btn-primary">Add New</a>
+    <a asp-controller="Admin" asp-action="Testimonial" class="btn btn-primary">Show All Testimonials</a>
+</div>
 
 <table class="table">
     <tr>
@@ -45,6 +51,3 @@
 
     }
 </table>
-
-<a asp-controller="Admin" asp-action="Home" class="btn btn-primary">Add New</a>
-<a asp-controller="Admin" asp-action="Testimonial" class="btn btn-primary">Show All Testimonials</a>

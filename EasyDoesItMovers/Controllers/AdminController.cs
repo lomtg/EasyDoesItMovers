@@ -121,5 +121,12 @@ namespace EasyDoesItMovers.Controllers
         {
             return View(await _informationRepository.GetInformationPage(slug));
         }
+
+        [HttpGet]
+        public IActionResult TeamEdit(Guid id)
+        {
+            return View(_teamRepository.GetTeamsAdmin().Result.ToList().FirstOrDefault(o=> o.Id == id));
+        }
+
     }
 }
