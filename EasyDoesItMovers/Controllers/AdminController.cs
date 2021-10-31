@@ -1,4 +1,5 @@
-﻿using EasyDoesItMovers.Models;
+﻿using EasyDoesItMovers.Helpers;
+using EasyDoesItMovers.Models;
 using EasyDoesItMovers.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -126,6 +127,17 @@ namespace EasyDoesItMovers.Controllers
         public IActionResult TeamEdit(Guid id)
         {
             return View(_teamRepository.GetTeamsAdmin().Result.ToList().FirstOrDefault(o=> o.Id == id));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> TeamEdit(Guid id,Team updatingTeam)
+        {
+            var file = Request.Form.Files.FirstOrDefault();
+            var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+            updatingTeam.ImageData = imageDataIntoBytes;
+
+            await _teamRepository.UpdateTeam(id,updatingTeam);
+            return View("Team",_teamRepository.GetTeamsAdmin().Result);
         }
 
     }

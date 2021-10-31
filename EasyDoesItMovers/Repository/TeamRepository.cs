@@ -48,9 +48,24 @@ namespace EasyDoesItMovers.Repository
         {
             return await _context.Teams.ToListAsync();
         }
-        public Task DeleteTeam(Guid Id)
+        public Task DeleteTeam(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task UpdateTeam(Guid id,Team team)
+        {
+            var entity = _context.Teams.FirstOrDefault(o=> o.Id == id);
+
+            if(entity != null)
+            {
+                entity.Name = team.Name;
+                entity.Position = team.Position;
+                entity.ShortDescription = team.ShortDescription;
+                entity.Text = team.Text;
+                entity.ImageData = team.ImageData;
+            }            
+            await _context.SaveChangesAsync();
         }
     }
 }

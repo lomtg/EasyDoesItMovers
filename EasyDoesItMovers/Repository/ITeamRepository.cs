@@ -12,6 +12,7 @@ namespace EasyDoesItMovers.Repository
         public Task<IEnumerable<TeamViewModel>> GetTeams();
         public Task<IEnumerable<Team>> GetTeamsAdmin();
         public Task AddTeam(Team team);
-        public Task DeleteTeam(Guid Id);
+        public Task DeleteTeam(Guid id);
+        public Task UpdateTeam(Guid id,Team team);
     }
 }
