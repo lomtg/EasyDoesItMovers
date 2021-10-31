@@ -3,49 +3,82 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - UniBlog</title>
+    <title>@ViewData["Title"] EasyDoesItMovers</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     @if (User.Identity.IsAuthenticated)
     {
-
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AdminPanel</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <ul class="navbar-nav flex-grow-1">             
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Logout">Logout</a>
+            <div class="container-fluid">
+                <div class="row flex-nowrap">
+                    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                                <li>
+                                    <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"></span> Home </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"></span> Testimonials </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"></span> Teams </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"></span> Moving Services </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline"></span> About Us </a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            }
-                        </ul>
+                                <li>
+                                    <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                                        <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span>
+                                    </a>
+                                    <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+                                        <li class="w-100">
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span>Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span>Testimonials</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span>Teams</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span>About Us</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <hr>
+                            <div class="dropdown pb-4">
+                                <a href="#" class="d-flex align-items-center text-white text-decoration-none" id="dropdownUser1" aria-expanded="false">
+                                    <img src="~/images/admin.png" width="30" height="30" class="rounded-circle">
+                                    <span class="d-none d-sm-inline mx-1">Admin</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col py-3">
+                        @RenderBody()
                     </div>
                 </div>
-            </nav>
-        </header>
-    }
-
-    <div style="text-align:center;">
-        @if (User.Identity.IsAuthenticated)
+            </div>
+        </header> }
+    else
         {
-            <h3>Welcome Back @User.Identity.Name!</h3>
-            <br />
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
         }
-    </div>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
