@@ -47,9 +47,11 @@ namespace EasyDoesItMovers.Repository
         {
             return await _context.Testimonials.ToListAsync();
         }
-        public Task DeleteTestimonial(Guid id)
+        public async Task DeleteTestimonial(Guid id)
         {
-            throw new NotImplementedException();
+            var testimonialToDelete = await _context.Testimonials.FindAsync(id);
+            _context.Testimonials.Remove(testimonialToDelete);
+            await _context.SaveChangesAsync();
         }
         public async Task UpdateTestimonial(Guid id, Testimonial testimonial)
         {

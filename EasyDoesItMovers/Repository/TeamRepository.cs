@@ -48,9 +48,11 @@ namespace EasyDoesItMovers.Repository
         {
             return await _context.Teams.ToListAsync();
         }
-        public Task DeleteTeam(Guid id)
+        public async Task DeleteTeam(Guid id)
         {
-            throw new NotImplementedException();
+            var teamToDelete = await _context.Teams.FindAsync(id);
+            _context.Teams.Remove(teamToDelete);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateTeam(Guid id,Team team)

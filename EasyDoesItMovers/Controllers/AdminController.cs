@@ -163,5 +163,16 @@ namespace EasyDoesItMovers.Controllers
             return View("Testimonial", _teamRepository.GetTeamsAdmin().Result);
         }
 
+        [HttpGet]
+        public IActionResult TestimonialAdd()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult TeamAdd()
+        {
+            return View();
+        }
     }
 }

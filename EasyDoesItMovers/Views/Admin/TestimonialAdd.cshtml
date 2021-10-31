@@ -1,0 +1,26 @@
+﻿@model Testimonial
+
+<h2>Add new Testimonial</h2>
+
+<form asp-controller="Create" asp-action="Testimonial" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="formFile" class="form-label">Image</label>
+        <input class="form-control" type="file" id="file" name="file">
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date">Date</label>
+        <textarea class="form-control" asp-for="Date"></textarea>
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Text">ShortDescription</label>
+        <textarea class="form-control" asp-for="Text" rows="5"></textarea>
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
