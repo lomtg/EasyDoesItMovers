@@ -21,7 +21,10 @@ namespace EasyDoesItMovers.Controllers
         private readonly IInformationRepository _informationRepository;
         private readonly IConfiguration _configuration;
 
-        public AdminController(ITeamRepository teamRepository, ITestimonialRepository testimonialRepository, IInformationRepository informationRepository,IConfiguration configuration )
+        public AdminController(ITeamRepository teamRepository,
+            ITestimonialRepository testimonialRepository,
+            IInformationRepository informationRepository,
+            IConfiguration configuration )
         {
             if (teamRepository is null)
             {

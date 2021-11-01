@@ -51,7 +51,7 @@ namespace EasyDoesItMovers.Controllers
             return View();
         }
 
-        [HttpGet("Home/{slug}")]
+        [HttpGet("{slug}")]
         public async Task<ActionResult> Services(string slug)
         {
             return View(await _informationRepository.GetInformationPage(slug));

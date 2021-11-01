@@ -56,11 +56,6 @@ namespace EasyDoesItMovers.Repository
             return await _context.Information.FirstOrDefaultAsync(o => o.Slug == slug);
         }
 
-        public Information GetInformationPageFromMemory(string slug)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<Information> UpdateInformation(Information information)
         {
             var entity = _context.Information.FirstOrDefault(o => o.Id == information.Id);
