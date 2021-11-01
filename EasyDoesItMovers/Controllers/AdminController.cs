@@ -210,5 +210,17 @@ namespace EasyDoesItMovers.Controllers
             await _teamRepository.AddTeam(team);
             return View("Team", await _teamRepository.GetTeamsAdmin());
         }
+
+        public async Task<IActionResult> TeamDelete(Guid id)
+        {
+            await _teamRepository.DeleteTeam(id);
+            return View("Team", await _teamRepository.GetTeamsAdmin()); 
+        }
+
+        public async Task<IActionResult> TestimonialDelete(Guid id)
+        {
+            await _testimonialRepository.DeleteTestimonial(id);
+            return View("Testimonial", await _testimonialRepository.GetTestimonialsAdmin());
+        }
     }
 }

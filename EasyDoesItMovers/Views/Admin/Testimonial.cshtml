@@ -2,55 +2,59 @@
 <h1>Testimonials</h1>
 
 
-<form method="get">
-    <div class="form-group">
-        <div class="input-group">
-            <input type="search" class="form-control" asp-controller="Admin" asp-action="Testimonial" name="name" />
-            <span class="input-group-btn">
-                <button class="btn btn-default">
-                    <i class="glyphicon glyphicon-search"></i>
-                </button>
-            </span>
+    <form method="get">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="search" class="form-control" asp-controller="Admin" asp-action="Testimonial" name="name" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
         </div>
+    </form>
+
+    <div class="form-group">
+        <a asp-controller="Admin" asp-action="TestimonialAdd" class="btn btn-primary">Add New</a>
+        <a asp-controller="Admin" asp-action="Testimonial" class="btn btn-primary">Show All Testimonials</a>
     </div>
-</form>
 
-<div class="form-group">
-    <a asp-controller="Admin" asp-action="TestimonialAdd" class="btn btn-primary">Add New</a>
-    <a asp-controller="Admin" asp-action="Testimonial" class="btn btn-primary">Show All Testimonials</a>
-</div>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Text</th>
+            <th>Image</th>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Text</th>
-        <th>Image</th>
-    </tr>
+        @foreach (var testimonial in Model)
+        {
+            <tr>
+                <td>@testimonial.Name</td>
+                <td>@testimonial.Date</td>
+                <td>@testimonial.Text</td>
+                    @if (testimonial.ImageData != null)
+                    {
+                        <td><img src="@testimonial.ImageData.GetImageURL()" width="170" height="110" /></td>
+                    }
+                    else
+                    {
+                        <td><img src="~/images/default-face.jpg" width="170" height="110" /></td>
+                    }
+                    <td>
+                        <a class="btn btn-lg"
+                           asp-controller="Admin" asp-action="TestimonialDelete"
+                           asp-route-Id="@testimonial.Id">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                        <a class="btn btn-lg"
+                           asp-controller="Admin" asp-action="TestimonialEdit"
+                           asp-route-Id="@testimonial.Id">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                    </td>
+            </tr>
 
-    @foreach (var testimonial in Model)
-    {
-<tr>
-    <td>@testimonial.Name</td>
-    <td>@testimonial.Date</td>
-    <td>@testimonial.Text</td>
-            @if (testimonial.ImageData != null)
-            {
-                <td><img src="@testimonial.ImageData.GetImageURL()" width="170" height="110" /></td>
-            }
-    <td>
-        <a class="btn btn-lg"
-           asp-controller="Admin" asp-action="Home"
-           asp-route-Id="@testimonial.Id">
-            <i class="glyphicon glyphicon-remove"></i>
-        </a>
-        <a class="btn btn-lg"
-           asp-controller="Admin" asp-action="TestimonialEdit"
-           asp-route-Id="@testimonial.Id">
-            <i class="glyphicon glyphicon-edit"></i>
-        </a>
-    </td>
-</tr>
-
-    }
-</table>
+        }
+    </table>
