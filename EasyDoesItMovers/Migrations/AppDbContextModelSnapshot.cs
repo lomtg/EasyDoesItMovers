@@ -21,10 +21,15 @@ namespace EasyDoesItMovers.Migrations
 
             modelBuilder.Entity("EasyDoesItMovers.Models.Information", b =>
                 {
-                    b.Property<string>("Slug")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ShortDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slug")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -36,7 +41,7 @@ namespace EasyDoesItMovers.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Slug");
+                    b.HasKey("Id");
 
                     b.ToTable("Information");
                 });

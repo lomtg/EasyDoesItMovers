@@ -4,7 +4,7 @@
 
 
 <form asp-controller="Admin" asp-action="InformationEdit" method="post" enctype="multipart/form-data">
-    <input hidden asp-route-slug="Slug" />
+    <input hidden asp-for="Id" />
     <div class="form-group">
         <label asp-for="Title">Title</label>
         <input type="text" class="form-control" asp-for="Title" placeholder="Title">

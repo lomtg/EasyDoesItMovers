@@ -61,9 +61,9 @@ namespace EasyDoesItMovers.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<Information> UpdateInformation(string slug,Information information)
+        public async Task<Information> UpdateInformation(Information information)
         {
-            var entity = _context.Information.FirstOrDefault(o => o.Slug == slug);
+            var entity = _context.Information.FirstOrDefault(o => o.Id == information.Id);
 
             if (entity != null)
             {
@@ -72,6 +72,7 @@ namespace EasyDoesItMovers.Repository
                 entity.ShortDescription = information.ShortDescription;
                 entity.Text = information.Text;
             }
+
             await _context.SaveChangesAsync();
             return information;
         }

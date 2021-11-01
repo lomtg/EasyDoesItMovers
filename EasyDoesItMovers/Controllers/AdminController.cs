@@ -223,9 +223,9 @@ namespace EasyDoesItMovers.Controllers
             return View("Testimonial", await _testimonialRepository.GetTestimonialsAdmin());
         }
 
-        public async Task<IActionResult> InformationEdit(string slug,Information information)
+        public async Task<IActionResult> InformationEdit(Information information)
         {
-            var updatedInfo = await _informationRepository.UpdateInformation(slug,information);
+            var updatedInfo = await _informationRepository.UpdateInformation(information);
             return View("Services", updatedInfo);
         }
     }

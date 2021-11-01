@@ -9,6 +9,8 @@ namespace EasyDoesItMovers.Models
     public class Information
     {
         [Key]
+        public Guid Id { get; set; }
+        [Required]
         public string Slug { get; set; }
         [Required]
         public string Title { get; set; }
