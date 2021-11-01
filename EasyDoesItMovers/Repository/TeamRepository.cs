@@ -44,7 +44,7 @@ namespace EasyDoesItMovers.Repository
             return _mapper.Map<IEnumerable<TeamViewModel>>(teams);
         }
 
-        public async Task<IEnumerable<Team>> GetTeamsAdmin()
+        public async Task<List<Team>> GetTeamsAdmin()
         {
             return await _context.Teams.ToListAsync();
         }
@@ -58,6 +58,8 @@ namespace EasyDoesItMovers.Repository
         public async Task UpdateTeam(Guid id,Team team)
         {
             var entity = _context.Teams.FirstOrDefault(o=> o.Id == id);
+
+            if (team.ImageData == null) team.ImageData = entity.ImageData;
 
             if(entity != null)
             {

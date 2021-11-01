@@ -10,7 +10,7 @@ namespace EasyDoesItMovers.Repository
     public interface ITestimonialRepository
     {
         public Task<IEnumerable<TestimonialViewModel>> GetTestimonials();
-        public Task<IEnumerable<Testimonial>> GetTestimonialsAdmin();
+        public Task<List<Testimonial>> GetTestimonialsAdmin();
         public Task AddTestimonial(Testimonial testimonial);
         public Task DeleteTestimonial(Guid id);
         public Task UpdateTestimonial(Guid id, Testimonial testimonial);

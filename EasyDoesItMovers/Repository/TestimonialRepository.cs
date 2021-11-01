@@ -43,7 +43,7 @@ namespace EasyDoesItMovers.Repository
             var testimonials = await _context.Testimonials.ToListAsync();
             return _mapper.Map<IEnumerable<TestimonialViewModel>>(testimonials);
         }
-        public async Task<IEnumerable<Testimonial>> GetTestimonialsAdmin()
+        public async Task<List<Testimonial>> GetTestimonialsAdmin()
         {
             return await _context.Testimonials.ToListAsync();
         }
@@ -56,6 +56,8 @@ namespace EasyDoesItMovers.Repository
         public async Task UpdateTestimonial(Guid id, Testimonial testimonial)
         {
             var entity = _context.Testimonials.FirstOrDefault(o => o.Id == id);
+
+            if (testimonial.ImageData == null) testimonial.ImageData = entity.ImageData;
 
             if (entity != null)
             {

@@ -140,7 +140,7 @@ namespace EasyDoesItMovers.Controllers
             }
 
             await _teamRepository.UpdateTeam(id,updatingTeam);
-            return View("Team",_teamRepository.GetTeamsAdmin().Result);
+            return View("Team",await _teamRepository.GetTeamsAdmin());
         }
 
         [HttpGet]
@@ -158,9 +158,9 @@ namespace EasyDoesItMovers.Controllers
             var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
             updatingTestimonial.ImageData = imageDataIntoBytes;
             }
-
+            
             await _testimonialRepository.UpdateTestimonial(id, updatingTestimonial);
-            return View("Testimonial", _teamRepository.GetTeamsAdmin().Result);
+            return View("Testimonial", await _testimonialRepository.GetTestimonialsAdmin());
         }
 
         [HttpGet]
