@@ -38,6 +38,10 @@
                 {
                     <td><img src="@team.ImageData.GetImageURL()" width="170" height="110" /></td>
                 }
+            else
+                { 
+                    <td><img src="~/images/defualt-img.jpg" width="170" height="110"/></td>
+                }
             <td>
                 <a class="btn btn-lg"
                    asp-controller="Admin" asp-action="Home"

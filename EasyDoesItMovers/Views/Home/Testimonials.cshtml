@@ -11,7 +11,14 @@
             {
                 <blockquote class="to_animate" data-animation="fadeInRight">
                     <span class="avatar">
-                        <img src="@testimonial.ImageDataURL" alt="Lakisha Knaus">
+                        @if (testimonial.ImageDataURL != null)
+                        {
+                            <img src="@testimonial.ImageDataURL" alt="" />
+                        }
+                        else
+                        {
+                            <img src="~/images/default-face.jpg" alt="" />
+                        }
                     </span>
 
                     <div>

@@ -14,7 +14,14 @@
                             <div class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="item to_animate" data-animation="fadeInUp">
                                     <figure>
-                                        <img src="@team.ImageDataURL" alt="" />
+                                        @if (team.ImageDataURL != null)
+                                        {
+                                            <img src="@team.ImageDataURL" alt=""/>
+                                        }
+                                        else
+                                        {
+                                            <img src="~/images/defualt-img.jpg" alt="" height="240"/>
+                                        }
                                     </figure>
                                     <div>
                                         <h3 class="item-title">@team.Name</h3>

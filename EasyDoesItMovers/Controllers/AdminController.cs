@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,9 @@ namespace EasyDoesItMovers.Controllers
         private readonly ITeamRepository _teamRepository;
         private readonly ITestimonialRepository _testimonialRepository;
         private readonly IInformationRepository _informationRepository;
+        private readonly IConfiguration _configuration;
 
-        public AdminController(ITeamRepository teamRepository, ITestimonialRepository testimonialRepository, IInformationRepository informationRepository)
+        public AdminController(ITeamRepository teamRepository, ITestimonialRepository testimonialRepository, IInformationRepository informationRepository,IConfiguration configuration )
         {
             if (teamRepository is null)
             {
@@ -36,9 +38,15 @@ namespace EasyDoesItMovers.Controllers
                 throw new ArgumentNullException(nameof(informationRepository));
             }
 
+            if (configuration is null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
             _teamRepository = teamRepository;
             _testimonialRepository = testimonialRepository;
             _informationRepository = informationRepository;
+            _configuration = configuration;
         }
 
         [AllowAnonymous]
@@ -173,6 +181,34 @@ namespace EasyDoesItMovers.Controllers
         public IActionResult TeamAdd()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TestimonialAdd(Testimonial testimonial)
+        {
+            var file = Request.Form.Files.FirstOrDefault();
+            if (file != null)
+            {
+                var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+                testimonial.ImageData = imageDataIntoBytes;
+            }
+
+            await _testimonialRepository.AddTestimonial(testimonial);
+            return View("Testimonial", await _testimonialRepository.GetTestimonialsAdmin());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TeamAdd(Team team)
+        {
+            var file = Request.Form.Files.FirstOrDefault();
+            if (file != null)
+            {
+                var imageDataIntoBytes = ImageHelpers.TurnImageIntoBytes(file);
+                team.ImageData = imageDataIntoBytes;
+            }
+
+            await _teamRepository.AddTeam(team);
+            return View("Team", await _teamRepository.GetTeamsAdmin());
         }
     }
 }

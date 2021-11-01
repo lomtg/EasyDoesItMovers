@@ -11,6 +11,11 @@
         {
             <img src="@Model.ImageData.GetImageURL()" width="170" height="110" />
         }
+        else
+        {
+            <img src="~/images/defualt-img.jpg" width="170" height="110" />
+        }
+
         <label for="formFile" class="form-label">Current Image</label>
         <input class="form-control" type="file" id="file" name="file">
     </div>
