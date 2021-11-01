@@ -60,5 +60,20 @@ namespace EasyDoesItMovers.Repository
         {
             throw new NotImplementedException();
         }
+
+        public async Task<Information> UpdateInformation(string slug,Information information)
+        {
+            var entity = _context.Information.FirstOrDefault(o => o.Slug == slug);
+
+            if (entity != null)
+            {
+                entity.Slug = information.Slug;
+                entity.Title = information.Title;
+                entity.ShortDescription = information.ShortDescription;
+                entity.Text = information.Text;
+            }
+            await _context.SaveChangesAsync();
+            return information;
+        }
     }
 }

@@ -222,5 +222,11 @@ namespace EasyDoesItMovers.Controllers
             await _testimonialRepository.DeleteTestimonial(id);
             return View("Testimonial", await _testimonialRepository.GetTestimonialsAdmin());
         }
+
+        public async Task<IActionResult> InformationEdit(string slug,Information information)
+        {
+            var updatedInfo = await _informationRepository.UpdateInformation(slug,information);
+            return View("Services", updatedInfo);
+        }
     }
 }

@@ -59,5 +59,10 @@ namespace EasyDoesItMovers.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Task<Information> UpdateInformation(string slug, Information information)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
